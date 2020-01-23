@@ -23,16 +23,16 @@ public class Controller {
         writeToFile(encrypt(username), encrypt(password));
     }
     private static String encrypt(String input)throws Exception{
-        String message = input;
+        //String message = input;
         MessageDigest md = MessageDigest.getInstance("SHA-512");
-        md.update(message.getBytes());
+        md.update(input.getBytes());
 
         byte[] digest = md.digest();
 
 
-        StringBuffer hexString = new StringBuffer();
-        for(int i = 0; i < digest.length; i++){
-            hexString.append(Integer.toHexString(0xFF & digest[i]));
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : digest) {
+            hexString.append(Integer.toHexString(0xFF & b));
         }
         return hexString.toString();
     }
@@ -49,23 +49,20 @@ public class Controller {
         String line = System.getProperty("line.separator");
         testWrite.write(toWrite + line);
         testWrite.close();
-        //Files.write(Paths.get(pathToFile), Collections.singleton(toWrite));
-        //Files.close();
     }
     private static void readFromFile(){
 
     }
     private static String input(String n){
         Scanner sc = new Scanner(System.in);
-        if(n == "U"){
+        if(n.equals("U")){
             System.out.println("Enter username");
-        }else if( n == "P"){
+        }else if(n.equals("P")){
             System.out.println("Enter password");
         }else{
             System.out.println("system error!");
         }
-        String message = sc.nextLine();
-        return message;
+        return sc.nextLine();
     }
 
 }
