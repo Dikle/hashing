@@ -19,8 +19,8 @@ public class Controller {
         }else{
             System.out.println("Wrong username or password");
         }
-
     }
+
     private static String encrypt(String input)throws Exception{
         MessageDigest md = MessageDigest.getInstance("SHA-512");
         md.update(input.getBytes());
